@@ -8,7 +8,22 @@
         </v-toolbar-title>
 
         <v-spacer></v-spacer> <!-- this will take up all the free space until the next element that is the buttop -->
-        <v-btn flat color="grey">
+        <!-- dropdown menu -->
+        <v-menu offset-y>
+            <v-btn flat color="grey" slot="activator">
+                <span class="grey--text">Menu</span>
+                <v-icon left>expand_more</v-icon>
+            </v-btn>
+            <v-list>
+                <v-list-tile v-for="link in links" :key="link.text" router :to="link.route">
+                    <v-list-tile-title>
+                        {{link.text}}
+                    </v-list-tile-title>
+                </v-list-tile>
+            </v-list>
+        </v-menu>
+        
+        <v-btn flat small color="grey">
             <span>Sign Out</span>
             <v-icon right>exit_to_app</v-icon>
         </v-btn>
@@ -21,6 +36,9 @@
                     <img src="/avatar-4.png">
                 </v-avatar>
                 <p class="subheading mt-1 white--text text-xs-center">Djo</p>
+            </v-flex>
+            <v-flex class="mt-4 mb-3">
+                <popup />
             </v-flex>
         </v-layout>
         <v-list>
@@ -38,7 +56,9 @@
 </template>
 
 <script>
+import popup from './Popup'
 export default {
+    components:{popup},
     data(){
         return{
             boi:false,
