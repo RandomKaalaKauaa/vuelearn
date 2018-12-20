@@ -7,27 +7,45 @@
   </v-btn>
 
   <v-container class='my-5'>
+
+    
+    <v-layout row>
+      <v-tooltip top>
+        <v-btn small flat color="grey" @click="sortBy('title')" slot="activator">
+        <v-icon small left>folder</v-icon>
+        <span>By Project</span>
+      </v-btn>
+      <span>sort projects by project name</span>
+      </v-tooltip>
+      
+      <v-tooltip top>
+        <v-btn small flat color="grey" @click="sortBy('person')" slot="activator">
+        <v-icon small left>person</v-icon>
+        <span>By person</span>
+      </v-btn>
+      <span>sort projects by person</span>
+      </v-tooltip>
+      
+
+    </v-layout>
     <v-card flat v-for="project in projects" :key="project.name">
       <v-layout wrap row :class="`pa-3 project ${project.status}`">
         <v-flex xs12 md6>
           <div class="caption grey--text">Project Title</div>
           <div>{{project.title}}</div>
         </v-flex>
-
         <v-flex xs6 sm4 md2>
           <div class="caption grey--text">Person</div>
           <div>{{project.person}}</div>
         </v-flex>
-
-        <v-flex xs6 sm4 md2>
-          <div class="caption grey--text">Due by</div>
-          <div>{{project.due}}</div>
+          <v-flex xs6 sm4 md2>
+            <div class="caption grey--text">Due by</div>
+            <div>{{project.due}}</div>
         </v-flex>
-
         <v-flex xs6 sm4 md2>
-        <div class="right">
-          <v-chip :class="`white--text ${project.status}`">{{project.status}}</v-chip>  
-        </div>
+          <div class="right">
+            <v-chip :class="`white--text ${project.status}`">{{project.status}}</v-chip>  
+          </div>
         </v-flex>
 
       </v-layout>
@@ -42,13 +60,20 @@
   export default {
     data(){
       return{
-        projects : [{ title: 'Design a new website', person: 'The Net Ninja', due: '1st Jan 2019', status: 'ongoing', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt consequuntur eos eligendi illum minima adipisci deleniti, dicta mollitia enim explicabo fugiat quidem ducimus praesentium voluptates porro molestias non sequi animi!'},
-        { title: 'Make todo vuetify app', person: 'djo', due: '30th Nov 2018', status: 'ongoing', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt consequuntur eos eligendi illum minima adipisci deleniti, dicta mollitia enim explicabo fugiat quidem ducimus praesentium voluptates porro molestias non sequi animi!'},
-        { title: 'Design video thumbnails', person: 'Ryu', due: '20th Dec 2018', status: 'complete', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt consequuntur eos eligendi illum minima adipisci deleniti, dicta mollitia enim explicabo fugiat quidem ducimus praesentium voluptates porro molestias non sequi animi!'},
-        { title: 'Create a community forum', person: 'Gouken', due: '20th Oct 2018', status: 'overdue', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt consequuntur eos eligendi illum minima adipisci deleniti, dicta mollitia enim explicabo fugiat quidem ducimus praesentium voluptates porro molestias non sequi animi!'},
+        projects : [{ title: 'Design a new website', person: 'The net Ninja', due: '1st Jan 2019', status: 'ongoing', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt consequuntur eos eligendi illum minima adipisci deleniti, dicta mollitia enim explicabo fugiat quidem ducimus praesentium voluptates porro molestias non sequi animi!'},
+        { title: 'Make todo vuetify app', person: 'Djo', due: '30th Nov 2018', status: 'ongoing', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt consequuntur eos eligendi illum minima adipisci deleniti, dicta mollitia enim explicabo fugiat quidem ducimus praesentium voluptates porro molestias non sequi animi!'},
+        { title: 'Design video thumbnails', person: 'Chun li', due: '20th Dec 2018', status: 'complete', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt consequuntur eos eligendi illum minima adipisci deleniti, dicta mollitia enim explicabo fugiat quidem ducimus praesentium voluptates porro molestias non sequi animi!'},
+        { title: 'Create a community forum', person: 'Gokuen', due: '20th Oct 2018', status: 'overdue', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt consequuntur eos eligendi illum minima adipisci deleniti, dicta mollitia enim explicabo fugiat quidem ducimus praesentium voluptates porro molestias non sequi animi!'},
       ]
       }
+     },
+    
+    methods:{
+      sortBy(prop){
+        this.projects.sort((a,b) => a[prop] < b[prop] ? -1 : 1)
+      }
     }
+
   }
 </script>
 
