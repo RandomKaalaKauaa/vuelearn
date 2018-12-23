@@ -1,5 +1,10 @@
 <template>
     <nav>
+
+        <v-snackbar top v-model='snackbar' :timeout="5000" color='teal'>
+            <span>Project created</span>
+            <v-btn flat color='white' @click="snackbar = false">Close</v-btn>
+        </v-snackbar>
     <v-toolbar flat app>
         <v-toolbar-side-icon class='grey' @click="boi=!boi"></v-toolbar-side-icon>
         <v-toolbar-title class="text-uppercase grey--text text--darken-2">
@@ -38,7 +43,7 @@
                 <p class="subheading mt-1 white--text text-xs-center">Djo</p>
             </v-flex>
             <v-flex class="mt-4 mb-3">
-                <popup />
+                <popup @projectAdded="snackbar = true" />
             </v-flex>
         </v-layout>
         <v-list>
@@ -66,7 +71,8 @@ export default {
                 {icon:'dashboard',text:'Dashboard',route:'/'},
                 {icon:'folder',text:'My projects',route:'/projects'},
                 {icon:'person',text:'Team',route:'/team'}
-            ]
+            ],
+            snackbar:false
         }
     }
 }
